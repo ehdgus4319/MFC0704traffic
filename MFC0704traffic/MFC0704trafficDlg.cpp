@@ -16,8 +16,9 @@
 #define new DEBUG_NEW
 #endif
 
-//C_AccidentData data[229];
-C_AccidentData str[229];
+
+//C_AccidentData str[229];
+vector< C_AccidentData> str(229);
 int sum[11] = { 0, };
 //vector<C_AccidentData> data;
 int j = 0;
@@ -213,7 +214,7 @@ HCURSOR CMFC0704trafficDlg::OnQueryDragIcon()
 
 
 
-void CMFC0704trafficDlg::OnBnClickedButton1()
+void CMFC0704trafficDlg::OnBnClickedButton1()  // 로드 버튼
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	m_LoadList.DeleteAllItems();
@@ -233,7 +234,7 @@ void CMFC0704trafficDlg::OnBnClickedButton1()
 				}
 				if (j == 1)
 				{
-					m_LoadList.SetItem(info, LVIF_TEXT, 1, str[count].city, 0, 0, 0, 0);
+					m_LoadList.SetItem(info, LVIF_TEXT, 1, str[count].city, 1, 5, 1, 4);
 				}
 				else
 				{
@@ -248,7 +249,7 @@ void CMFC0704trafficDlg::OnBnClickedButton1()
 }
 
 
-void CMFC0704trafficDlg::OnBnClickedButton2()
+void CMFC0704trafficDlg::OnBnClickedButton2()  // 검색 버튼
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	m_LoadList.DeleteAllItems();
