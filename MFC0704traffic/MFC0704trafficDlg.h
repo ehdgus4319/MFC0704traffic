@@ -35,4 +35,6 @@ public:
 	C_AccidentData** data;
 	afx_msg void OnBnClickedButton1();
 	CListCtrl m_LoadList;
+	afx_msg void OnBnClickedButton2();
+	CString m_search_edit;
 };
