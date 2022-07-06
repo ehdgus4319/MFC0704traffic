@@ -22,10 +22,11 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-	void SetListControl(C_AccidentData data_kid);
+	void SetListControl(vector< C_AccidentData> ptr);
 	CListCtrl m_SearchedListBox;
 	virtual BOOL OnInitDialog();
 	CString m_text;
 	int m_count_new;
-	C_AccidentData dataList_kid;
+	//C_AccidentData* dataList_kid;
+	vector< C_AccidentData> dataList_kid;
 };

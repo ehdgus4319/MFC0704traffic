@@ -65,61 +65,44 @@ BOOL CNewDlg::OnInitDialog()
 	m_SearchedListBox.InsertColumn(12, _T("지하도로내"), LVCFMT_CENTER, 100);
 	m_SearchedListBox.SetExtendedStyle(m_SearchedListBox.GetExtendedStyle() | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
 
+	m_SearchedListBox.DeleteAllItems();
+
+
+	UpdateData(true);
+	int kid_count = 0;
+	
+
+	for (int i = 0; i < dataList_kid.size() ; i++)
+	{
+		int info_count = m_SearchedListBox.GetItemCount();
+
+		for (int j = 0; j < 13; j++)
+		{
+			if (j == 0)
+			{
+				m_SearchedListBox.InsertItem(info_count, dataList_kid[i].state);
+			}
+			if (j == 1)
+			{
+				m_SearchedListBox.SetItem(info_count, LVIF_TEXT, 1, dataList_kid[i].city, 0, 0, 0, 0);
+			}
+			else
+			{
+				m_SearchedListBox.SetItem(info_count, j, LVIF_TEXT, dataList_kid[i].data_list[j - 2], 0, 0, 0, 0);
+			}
+		}
+		kid_count++;
+	}
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 }
-//vector< C_AccidentData> str(229);
-void CNewDlg::SetListControl(C_AccidentData data_kid)
+
+void CNewDlg::SetListControl(vector< C_AccidentData> ptr)
 {
 	// TODO: 여기에 구현 코드 추가.
 
-	UpdateData(true);
-	m_SearchedListBox.DeleteAllItems();
-	dataList_kid = data_kid;
-	int info_count = m_SearchedListBox.GetItemCount();
-	
-	m_count_new = m_SearchedListBox.GetItemCount();
-	for (int i = 0; i < 229; i++)
-	{
-		for (int j = 0; j < 13; j++)
-		{
-			if (str_data[i].state == m_text)
-			{
-
-				if (j == 0)
-				{
-					m_SearchedListBox.InsertItem(info_count, str_data[info_count].state);
-				}
-				if (j == 1)
-				{
-					m_SearchedListBox.SetItem(info_count, LVIF_TEXT, 1, str_data[info_count].city, 0, 0, 0, 0);
-				}
-				else
-				{
-					m_SearchedListBox.SetItem(info_count, j, LVIF_TEXT, str_data[info_count].data_list[j - 2], 0, 0, 0, 0);
-				}
-
-			}
-			else if (str_data[i].city == m_text)
-			{
-
-				if (j == 0)
-				{
-					m_SearchedListBox.InsertItem(info_count, str_data[info_count].state);
-				}
-				if (j == 1)
-				{
-					m_SearchedListBox.SetItem(info_count, LVIF_TEXT, 1, str_data[info_count].city, 0, 0, 0, 0);
-				}
-				else
-				{
-					m_SearchedListBox.SetItem(info_count, j, LVIF_TEXT, str_data[info_count].data_list[j - 2], 0, 0, 0, 0);
-				}
-
-			}
-		}
-		m_count_new++;
-	}
+	dataList_kid = ptr;
 	
 }
 

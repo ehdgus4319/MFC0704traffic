@@ -38,7 +38,7 @@ public:
 	//C_AccidentData** data;
 	vector< C_AccidentData> dataList;
 	afx_msg void OnBnClickedButton1();
+	afx_msg void OnBnClickedButton2();
 	CListCtrl m_LoadList;
-	afx_msg void OnBnClickedButton2(CString str_main);
 	CString m_search_edit;
 };

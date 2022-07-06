@@ -241,7 +241,7 @@ UpdateData(true);
 				}
 				if (j == 1)
 				{
-					m_LoadList.SetItem(info, LVIF_TEXT, 1, dataList[count].city, 1, 5, 1, 4);
+					m_LoadList.SetItem(info, LVIF_TEXT, 1, dataList[count].city, 0, 0, 0, 0);
 				}
 				else
 				{
@@ -256,13 +256,10 @@ UpdateData(true);
 }
 
 
-void CMFC0704trafficDlg::OnBnClickedButton2(CString str_main)  // 검색 버튼
+void CMFC0704trafficDlg::OnBnClickedButton2()  // 검색 버튼
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	m_search_edit = str_main;
 	CNewDlg child;
-
-	//child.SetEditBox(_T("하이"));
 
 	vector< C_AccidentData> fliltered;
 	
@@ -287,8 +284,12 @@ void CMFC0704trafficDlg::OnBnClickedButton2(CString str_main)  // 검색 버튼
 			}
 		}
 		count++;
-		fliltered.push_back(tmp);
+		if(tmp.state != "")
+			fliltered.push_back(tmp);
 	}
 	child.SetListControl(fliltered);
 	child.DoModal();
 }
+
+
+
