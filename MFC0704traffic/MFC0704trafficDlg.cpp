@@ -70,6 +70,7 @@ void CMFC0704trafficDlg::DoDataExchange(CDataExchange* pDX)
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_LIST1, m_LoadList);
 	DDX_Text(pDX, IDC_EDIT1, m_search_edit);
+	DDX_Control(pDX, IDC_LIST2, m_SumList);
 }
 
 BEGIN_MESSAGE_MAP(CMFC0704trafficDlg, CDialogEx)
@@ -129,6 +130,22 @@ BOOL CMFC0704trafficDlg::OnInitDialog()
 	m_LoadList.InsertColumn(12, _T("지하도로내"), LVCFMT_CENTER, 100);
 	m_LoadList.SetExtendedStyle(m_LoadList.GetExtendedStyle() | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
 
+	m_SumList.InsertColumn(0, _T("시도"), LVCFMT_CENTER, 100);
+	m_SumList.InsertColumn(1, _T("시군구"), LVCFMT_CENTER, 100);
+	m_SumList.InsertColumn(2, _T("횡당보도상"), LVCFMT_CENTER, 100);
+	m_SumList.InsertColumn(3, _T("횡단보도부근"), LVCFMT_CENTER, 100);
+	m_SumList.InsertColumn(4, _T("터널안"), LVCFMT_CENTER, 100);
+	m_SumList.InsertColumn(5, _T("교량위"), LVCFMT_CENTER, 100);
+	m_SumList.InsertColumn(6, _T("기타단일로"), LVCFMT_CENTER, 100);
+	m_SumList.InsertColumn(7, _T("교차로내"), LVCFMT_CENTER, 100);
+	m_SumList.InsertColumn(8, _T("교차로부근"), LVCFMT_CENTER, 100);
+	m_SumList.InsertColumn(9, _T("건널목"), LVCFMT_CENTER, 100);
+	m_SumList.InsertColumn(10, _T("기타불명"), LVCFMT_CENTER, 100);
+	m_SumList.InsertColumn(11, _T("고가도로위"), LVCFMT_CENTER, 100);
+	m_SumList.InsertColumn(12, _T("지하도로내"), LVCFMT_CENTER, 100);
+	m_SumList.SetExtendedStyle(m_SumList.GetExtendedStyle() | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
+
+
 	ifstream data("data.csv");
 	string line;
 	int count = m_LoadList.GetItemCount();
@@ -160,8 +177,6 @@ BOOL CMFC0704trafficDlg::OnInitDialog()
 					0, 0);
 			}
 		}
-		j++;
-
 		dataList.push_back(tmp);
 
 	}
@@ -228,7 +243,7 @@ UpdateData(true);
 	
 	int info = m_LoadList.GetItemCount();
 	int count = 0;
-	for (int i = 0; i < 229; i++)
+	for (int i = 0; i < dataList.size(); i++)
 	{
 		for (int j = 0; j < 13; j++)
 		{
@@ -237,22 +252,20 @@ UpdateData(true);
 
 				if (j == 0)
 				{
-					m_LoadList.InsertItem(info, dataList[count].state);
+					m_LoadList.InsertItem(info, dataList[i].state);
 				}
 				if (j == 1)
 				{
-					m_LoadList.SetItem(info, LVIF_TEXT, 1, dataList[count].city, 0, 0, 0, 0);
+					m_LoadList.SetItem(info, LVIF_TEXT, 1, dataList[i].city, 0, 0, 0, 0);
 				}
 				else
 				{
-					m_LoadList.SetItem(info, j, LVIF_TEXT, dataList[count].data_list[j - 2], 0, 0, 0, 0);
+					m_LoadList.SetItem(info, j, LVIF_TEXT, dataList[i].data_list[j - 2], 0, 0, 0, 0);
 				}
 
 			}
 		}
-		count++;
 	}
-
 }
 
 
@@ -293,3 +306,10 @@ void CMFC0704trafficDlg::OnBnClickedButton2()  // 검색 버튼
 
 
 
+
+
+void CMFC0704trafficDlg::SetEditBox(vector< C_AccidentData> ptr)
+{
+	ptr = dataSumList;
+	// TODO: 여기에 구현 코드 추가.
+}

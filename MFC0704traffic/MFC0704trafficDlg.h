@@ -41,4 +41,6 @@ public:
 	afx_msg void OnBnClickedButton2();
 	CListCtrl m_LoadList;
 	CString m_search_edit;
+	CListCtrl m_SumList;
+	void SetEditBox(vector< C_AccidentData> ptr);
 };

@@ -67,10 +67,7 @@ BOOL CNewDlg::OnInitDialog()
 
 	m_SearchedListBox.DeleteAllItems();
 
-
 	UpdateData(true);
-	int kid_count = 0;
-	
 
 	for (int i = 0; i < dataList_kid.size() ; i++)
 	{
@@ -91,9 +88,7 @@ BOOL CNewDlg::OnInitDialog()
 				m_SearchedListBox.SetItem(info_count, j, LVIF_TEXT, dataList_kid[i].data_list[j - 2], 0, 0, 0, 0);
 			}
 		}
-		kid_count++;
 	}
-
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 }
