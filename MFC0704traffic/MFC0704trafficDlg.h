@@ -4,6 +4,9 @@
 
 #pragma once
 #include "C_AccidentData.h"
+#include <vector>
+
+using std::vector;
 
 // CMFC0704trafficDlg 대화 상자
 class CMFC0704trafficDlg : public CDialogEx
@@ -32,9 +35,10 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
-	C_AccidentData** data;
+	//C_AccidentData** data;
+	vector< C_AccidentData> dataList;
 	afx_msg void OnBnClickedButton1();
 	CListCtrl m_LoadList;
-	afx_msg void OnBnClickedButton2();
+	afx_msg void OnBnClickedButton2(CString str_main);
 	CString m_search_edit;
 };

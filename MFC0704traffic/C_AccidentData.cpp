@@ -4,7 +4,7 @@
 
 C_AccidentData::C_AccidentData()
 {
-	state = "default";
-	city = "default";
-	for (int i = 0; i < 11; i++) data_list[i] = "default";
+	state = "";
+	city = "";
+	for (int i = 0; i < 11; i++) data_list[i] = "";
 }

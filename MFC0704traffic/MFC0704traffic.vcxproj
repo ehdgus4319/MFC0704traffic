@@ -183,6 +183,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CNewDlg.h" />
     <ClInclude Include="C_AccidentData.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MFC0704traffic.h" />
@@ -192,6 +193,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CNewDlg.cpp" />
     <ClCompile Include="C_AccidentData.cpp" />
     <ClCompile Include="MFC0704traffic.cpp" />
     <ClCompile Include="MFC0704trafficDlg.cpp" />

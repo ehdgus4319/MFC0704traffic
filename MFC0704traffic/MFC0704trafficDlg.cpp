@@ -11,19 +11,18 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include "CNewDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 
-//C_AccidentData str[229];
-vector< C_AccidentData> str(229);
-int sum[11] = { 0, };
-//vector<C_AccidentData> data;
-int j = 0;
+
+
 // 응용 프로그램 정보에 사용되는 CAboutDlg 대화 상자입니다.
 
+int j = 0;
 class CAboutDlg : public CDialogEx
 {
 public:
@@ -139,6 +138,9 @@ BOOL CMFC0704trafficDlg::OnInitDialog()
 		stringstream lineStream(line); //한줄의 데이터를 가지고 사용
 		string cell;
 		CString cell2;
+
+		C_AccidentData tmp;
+
 		UpdateData(true);
 		for (int i = 0; i < 13; i++)
 		{
@@ -146,18 +148,22 @@ BOOL CMFC0704trafficDlg::OnInitDialog()
 			cell2 = CA2CT(cell.c_str());
 			if (i == 0)
 			{
-				str[j].state = cell2;
-				m_LoadList.SetItem(count, 1, LVIF_TEXT, str[j].city, 0, 0, 0,
+			
+				tmp.state = cell2;
+				m_LoadList.SetItem(count, 1, LVIF_TEXT, tmp.city, 0, 0, 0,
 					0);
 			}
 			else
 			{
-				str[j].data_list[i - 2] = cell2;
-				m_LoadList.SetItem(count, i, LVIF_TEXT, str[j].data_list[i - 2], 0, 0,
+				tmp.data_list[i - 2] = cell2;
+				m_LoadList.SetItem(count, i, LVIF_TEXT, tmp.data_list[i - 2], 0, 0,
 					0, 0);
 			}
 		}
 		j++;
+
+		dataList.push_back(tmp);
+
 	}
 
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
@@ -217,28 +223,29 @@ HCURSOR CMFC0704trafficDlg::OnQueryDragIcon()
 void CMFC0704trafficDlg::OnBnClickedButton1()  // 로드 버튼
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+UpdateData(true);
 	m_LoadList.DeleteAllItems();
-	UpdateData(true);
+	
 	int info = m_LoadList.GetItemCount();
 	int count = 0;
 	for (int i = 0; i < 229; i++)
 	{
 		for (int j = 0; j < 13; j++)
 		{
-			if (str[i].state )
+			if(dataList[i].state )
 			{
 
 				if (j == 0)
 				{
-					m_LoadList.InsertItem(info, str[count].state);
+					m_LoadList.InsertItem(info, dataList[count].state);
 				}
 				if (j == 1)
 				{
-					m_LoadList.SetItem(info, LVIF_TEXT, 1, str[count].city, 1, 5, 1, 4);
+					m_LoadList.SetItem(info, LVIF_TEXT, 1, dataList[count].city, 1, 5, 1, 4);
 				}
 				else
 				{
-					m_LoadList.SetItem(info, j, LVIF_TEXT, str[count].data_list[j - 2], 0, 0, 0, 0);
+					m_LoadList.SetItem(info, j, LVIF_TEXT, dataList[count].data_list[j - 2], 0, 0, 0, 0);
 				}
 
 			}
@@ -249,36 +256,39 @@ void CMFC0704trafficDlg::OnBnClickedButton1()  // 로드 버튼
 }
 
 
-void CMFC0704trafficDlg::OnBnClickedButton2()  // 검색 버튼
+void CMFC0704trafficDlg::OnBnClickedButton2(CString str_main)  // 검색 버튼
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	m_search_edit = str_main;
+	CNewDlg child;
+
+	//child.SetEditBox(_T("하이"));
+
+	vector< C_AccidentData> fliltered;
+	
 	m_LoadList.DeleteAllItems();
 	UpdateData(true);
-	int info = m_LoadList.GetItemCount();
+	
 	int count = 0;
 	for (int i = 0; i < 229; i++)
 	{
+		C_AccidentData tmp;
 		for (int j = 0; j < 13; j++)
 		{
-			if (str[i].state == m_search_edit)
+			if (dataList[i].state == m_search_edit)
 			{
 
-				if (j == 0)
-				{
-					m_LoadList.InsertItem(info, str[count].state);
-				}
-				if (j == 1)
-				{
-					m_LoadList.SetItem(info, LVIF_TEXT, 1, str[count].city, 0, 0, 0, 0);
-				}
-				else
-				{
-					m_LoadList.SetItem(info, j, LVIF_TEXT, str[count].data_list[j - 2], 0, 0, 0, 0);
-				}
+				tmp = dataList[i];
+			}
+			else if (dataList[i].city == m_search_edit)
+			{
 
+				tmp = dataList[i];
 			}
 		}
 		count++;
+		fliltered.push_back(tmp);
 	}
-
+	child.SetListControl(fliltered);
+	child.DoModal();
 }
