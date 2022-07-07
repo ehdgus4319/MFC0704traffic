@@ -11,7 +11,7 @@ using std::vector;
 // CMFC0704trafficDlg 대화 상자
 class CMFC0704trafficDlg : public CDialogEx
 {
-// 생성입니다.
+	// 생성입니다.
 public:
 	CMFC0704trafficDlg(CWnd* pParent = nullptr);	// 표준 생성자입니다.
 
@@ -20,7 +20,7 @@ public:
 	enum { IDD = IDD_MFC0704TRAFFIC_DIALOG };
 #endif
 
-	protected:
+protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV 지원입니다.
 
 
@@ -42,5 +42,4 @@ public:
 	CListCtrl m_LoadList;
 	CString m_search_edit;
 	CListCtrl m_SumList;
-	void SetEditBox(vector< C_AccidentData> ptr);
 };

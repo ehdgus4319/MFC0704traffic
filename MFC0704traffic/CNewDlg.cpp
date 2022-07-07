@@ -24,7 +24,7 @@ IMPLEMENT_DYNAMIC(CNewDlg, CDialogEx)
 CNewDlg::CNewDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_NewDlg, pParent), m_text(_T(""))
 {
-	
+
 }
 
 CNewDlg::~CNewDlg()
@@ -39,6 +39,7 @@ void CNewDlg::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(CNewDlg, CDialogEx)
+	ON_BN_CLICKED(IDC_BUTTON1, &CNewDlg::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 
@@ -67,9 +68,12 @@ BOOL CNewDlg::OnInitDialog()
 
 	m_SearchedListBox.DeleteAllItems();
 
-	UpdateData(true);
 
-	for (int i = 0; i < dataList_kid.size() ; i++)
+	UpdateData(true);
+	int kid_count = 0;
+
+
+	for (int i = 0; i < dataList_kid.size(); i++)
 	{
 		int info_count = m_SearchedListBox.GetItemCount();
 
@@ -88,7 +92,9 @@ BOOL CNewDlg::OnInitDialog()
 				m_SearchedListBox.SetItem(info_count, j, LVIF_TEXT, dataList_kid[i].data_list[j - 2], 0, 0, 0, 0);
 			}
 		}
+		kid_count++;
 	}
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 }
@@ -98,8 +104,13 @@ void CNewDlg::SetListControl(vector< C_AccidentData> ptr)
 	// TODO: 여기에 구현 코드 추가.
 
 	dataList_kid = ptr;
-	
+
 }
 
 
 
+
+void CNewDlg::OnBnClickedButton1()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+}

@@ -28,12 +28,12 @@ class CAboutDlg : public CDialogEx
 public:
 	CAboutDlg();
 
-// 대화 상자 데이터입니다.
+	// 대화 상자 데이터입니다.
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_ABOUTBOX };
 #endif
 
-	protected:
+protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
 
 // 구현입니다.
@@ -145,7 +145,6 @@ BOOL CMFC0704trafficDlg::OnInitDialog()
 	m_SumList.InsertColumn(12, _T("지하도로내"), LVCFMT_CENTER, 100);
 	m_SumList.SetExtendedStyle(m_SumList.GetExtendedStyle() | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
 
-
 	ifstream data("data.csv");
 	string line;
 	int count = m_LoadList.GetItemCount();
@@ -165,7 +164,7 @@ BOOL CMFC0704trafficDlg::OnInitDialog()
 			cell2 = CA2CT(cell.c_str());
 			if (i == 0)
 			{
-			
+
 				tmp.state = cell2;
 				m_LoadList.SetItem(count, 1, LVIF_TEXT, tmp.city, 0, 0, 0,
 					0);
@@ -238,16 +237,15 @@ HCURSOR CMFC0704trafficDlg::OnQueryDragIcon()
 void CMFC0704trafficDlg::OnBnClickedButton1()  // 로드 버튼
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-UpdateData(true);
+	UpdateData(true);
 	m_LoadList.DeleteAllItems();
-	
+
 	int info = m_LoadList.GetItemCount();
-	int count = 0;
 	for (int i = 0; i < dataList.size(); i++)
 	{
 		for (int j = 0; j < 13; j++)
 		{
-			if(dataList[i].state )
+			if (dataList[i].state)
 			{
 
 				if (j == 0)
@@ -265,7 +263,9 @@ UpdateData(true);
 
 			}
 		}
+
 	}
+
 }
 
 
@@ -275,12 +275,11 @@ void CMFC0704trafficDlg::OnBnClickedButton2()  // 검색 버튼
 	CNewDlg child;
 
 	vector< C_AccidentData> fliltered;
-	
+
 	m_LoadList.DeleteAllItems();
 	UpdateData(true);
-	
-	int count = 0;
-	for (int i = 0; i < 229; i++)
+
+	for (int i = 0; i < dataList.size(); i++)
 	{
 		C_AccidentData tmp;
 		for (int j = 0; j < 13; j++)
@@ -296,8 +295,8 @@ void CMFC0704trafficDlg::OnBnClickedButton2()  // 검색 버튼
 				tmp = dataList[i];
 			}
 		}
-		count++;
-		if(tmp.state != "")
+
+		if (tmp.state != "")
 			fliltered.push_back(tmp);
 	}
 	child.SetListControl(fliltered);
@@ -305,11 +304,3 @@ void CMFC0704trafficDlg::OnBnClickedButton2()  // 검색 버튼
 }
 
 
-
-
-
-void CMFC0704trafficDlg::SetEditBox(vector< C_AccidentData> ptr)
-{
-	ptr = dataSumList;
-	// TODO: 여기에 구현 코드 추가.
-}
