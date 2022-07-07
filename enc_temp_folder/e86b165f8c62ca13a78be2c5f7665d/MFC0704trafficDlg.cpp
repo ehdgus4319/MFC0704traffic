@@ -307,8 +307,8 @@ void CMFC0704trafficDlg::OnBnClickedButton2()  // 검색 버튼
 
 
 // CString str
-void CMFC0704trafficDlg::SetEditBox(CString str)
+void CMFC0704trafficDlg::SetEditBox(const CString str)
 {
 	// TODO: 여기에 구현 코드 추가.
-	
+	m_search_edit = str;
 }

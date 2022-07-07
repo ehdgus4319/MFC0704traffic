@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "C_AccidentData.h"
 #include <vector>
+#include "MFC0704trafficDlg.h"
 
 // CNewDlg 대화 상자
 
@@ -30,4 +31,9 @@ public:
 	//C_AccidentData* dataList_kid;
 	vector< C_AccidentData> dataList_kid;
 	afx_msg void OnBnClickedButton1();
+
+
+	CMFC0704trafficDlg* dlgPtr;
+
+	void SetParentPtr(CMFC0704trafficDlg* dlg);
 };

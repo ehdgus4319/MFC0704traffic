@@ -109,8 +109,17 @@ void CNewDlg::SetListControl(vector< C_AccidentData> ptr)
 
 
 
+void CNewDlg::SetParentPtr(CMFC0704trafficDlg* dlg)
+{
+	// TODO: 여기에 구현 코드 추가.
+	dlgPtr = dlg;
+}
+
+
 
 void CNewDlg::OnBnClickedButton1()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	dlgPtr->SetEditBox(_T("hello"));
 }
+

@@ -43,5 +43,5 @@ public:
 	CString m_search_edit;
 	CListCtrl m_SumList;
 	// CString str
-	void SetEditBox(CString str);
+	void SetEditBox(const CString str);
 };
